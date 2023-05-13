@@ -7,6 +7,13 @@
 // GIVEN a CMS - style blog site
 // WHEN I visit the site for the first time
 // THEN I am presented with the homepage, which includes existing blog posts if any have been posted; navigation links for the homepage and the dashboard; and the option to log in
+  // homepage/landingpage route
+  // nav bar, home, dashboard (for outside posts), login, logout, title of app
+  //all buttons should redirect to login here
+  //login: box under nav bar, option to sign up if no account, redirect to signup page (same as login, different button names)
+// *once logged in: home, logOUT, 'your dashboard'
+  // home shows posts from everyone that you can click and comment
+  //you dashboard has buttons for your posts with buttons to edit OR delete, button to also create new post.
 
 // WHEN I click on the homepage option
 // THEN I am taken to the homepage
