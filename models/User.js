@@ -4,7 +4,7 @@ const bcrypt = require('bcrypt');
 
 // create User model
 class User extends Model {
-  // validate password
+  // validate encrypted password
   checkPassword(loginPw) {
     return bcrypt.compareSync(loginPw, this.password);
   }
@@ -34,6 +34,7 @@ User.init(
     password: {
       type: DataTypes.STRING,
       allowNull: false,
+      // used for validating password length requirement
       validate: {
         len: [8],
       },
