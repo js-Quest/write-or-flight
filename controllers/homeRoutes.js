@@ -1,5 +1,7 @@
 const router = require('express').Router();
+const sequelize = require('../config/connection');
 const {Post, User, Comment} = require('../models');
+const withAuth = require('../utils/auth');
 
 // GET homepage
 router.get('/', async (req, res) => {
@@ -11,7 +13,7 @@ router.get('/', async (req, res) => {
           attributes: ['id', 'comment_content', 'user_id', 'post_id'],
           include: {
             model: User,
-            attributes: ['name']
+            attributes: ['username']
           },
           model: User,
           attributes: ['username']
@@ -28,8 +30,36 @@ router.get('/', async (req, res) => {
   }
 });
 
+router.get('post/:id', async (req,res) => {
+  try{
+    const postData = await Post.findByPk(req.params.id, {
+      include: [
+        {
+          model: Comment,
+          attributes: ['id', 'comment_content', 'post_id', 'user_id', 'created_at'],
+          include: [
+            {
+            model: User,
+            attributes: ['username']
+            },
+          ],
+        },
+      ],
+    });
+
+    const post = postData.get({plain:true});
+    res.render('post', {
+      ...post,
+      logged_in: req.session.logged_in
+    });
+  }catch(err){
+  res.status(500).json(err);
+  }
+});
+
+
 // login, if session exists redirect to homepage
-router.get('/login', (req, res) => {
+router.get('/login', withAuth, (req, res) => {
   if (req.session.logged_in) {
     res.redirect('/');
     return;
@@ -37,6 +67,13 @@ router.get('/login', (req, res) => {
   res.render('login');
 });
 
+router.get('/signup', (req,res) => {
+  if (req.session.logged_in) {
+    res.redirect('/');
+    return;
+  }
+  res.render('signup');
+});
 
 
 module.exports = router;
