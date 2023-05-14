@@ -1,6 +1,21 @@
 {{!-- this is the individual post user chooses to view --}}
 
 {{!-- individual post info and comments --}}
+{{>postInfo post}}
+
+{{#if logged_in}}
+<form>
+  <textarea name="" id="" cols="30" rows="10">
+
+  </textarea>
+  <div>
 {{!--  button for add comment --}}
+    <button>add comment</button>
+  </div>
+</form>
+{{/if}}
+
+{{>comments post.comments}}
+
 
 {{!-- option to return to dash --}}

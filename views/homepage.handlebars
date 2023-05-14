@@ -1,1 +1,10 @@
-{{!-- need to show all posts here  --}}
+{{!-- need to show all posts here, list  --}}
+<div>
+{{#each posts as |post|}}
+    <div>
+      {{>postInfo post}}
+    </div>
+    {{else}}
+    <h2>There are no current posts</h2>
+{{/each}}
+</div>
