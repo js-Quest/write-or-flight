@@ -17,26 +17,43 @@ router.get('/', (req, res) => {
 
 // create user /api/users
 router.post('/', async (req, res) => {
-  // try {
-  //   const userData = await User.create(req.body);
+  try {
+    const userData = await User.create(req.body);
 
+    req.session.save(() => {
+      req.session.name = userData.name;
+      req.session.user_id = userData.id;
+      req.session.logged_in = true;
+
+      res.status(200).json(userData);
+    });
+  } catch (err) {
+    console.log(err);
+    res.status(400).json(err);
+  }
+  // try{
+  //   const {name, email, password} = req.body;
+  //   const existingUser = await User.findOne({where: {email} });
+  //   if (existingUser){
+  //     return res.status(400).json({error: 'email already exists, please choose a unique email or login'})
+  //   }
+
+  //   const newUser = await User.create({ name, email, password });
   //   req.session.save(() => {
-  //     req.session.name = userData.name;
-  //     req.session.user_id = userData.id;
+  //     req.session.name = newUser.name;
+  //     req.session.user_id = newUser.id;
   //     req.session.logged_in = true;
-
-  //     res.status(200).json(userData);
-  //   });
-  // } catch (err) {
-  //   res.status(400).json(err);
+  //     res.status(200).json(newUser);
+  //   })
+  // }catch{
+  //   res.status(500).json({error: 'something went wrong'})
   // }
-  const {name, email, password} = req.body
 });
 
 // match login and password to a user and verify correct input
 router.post('/login', async (req, res) => {
   try {
-    const userData = await User.findOne({ where: { email: req.body.email } });
+    const userData = await User.findOne({ where: {email: req.body.email} });
 
     if (!userData) {
       res
