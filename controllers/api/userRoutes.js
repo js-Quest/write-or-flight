@@ -1,7 +1,7 @@
 const router = require('express').Router();
-const { User } = require('../../models');
+const { User, Post, Comment } = require('../../models');
 
-// create GET user /api/user
+// create user /api/user
 router.post('/', async (req, res) => {
   try {
     const userData = await User.create(req.body);
@@ -40,9 +40,10 @@ router.post('/login', async (req, res) => {
 
     req.session.save(() => {
       req.session.user_id = userData.id;
+      req.session.name = userData.name;
       req.session.logged_in = true;
-
-      res.json({ user: userData, message: 'You are now logged in!' });
+      console.log(userData.name);
+      res.json({ user: userData.name, message: 'You are now logged in!' });
     });
 
   } catch (err) {

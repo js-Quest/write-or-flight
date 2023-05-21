@@ -12,14 +12,16 @@ router.get('/', withAuth, async (req,res) => {
       include: [
         {
           model: Comment,
-          attributes: ['id', 'comment_content', 'user_id', 'post_id'],
+          attributes: ['id', 'comment_content', 'user_id', 'post_id', 'created_at'],
           include: {
             model: User,
             attributes: ['username']
           },
+        },
+        {
           model: User,
           attributes: ['username']
-        },
+        }
       ],
   });
   // Serialize data so the template can read it
@@ -31,7 +33,38 @@ router.get('/', withAuth, async (req,res) => {
   }
 });
 
+// new post
+router.get('/new', (req,res) => {
+  res.render('add-post', {
+    logged_in: true
+  })
+})
 
+// edit post
+router.get('/edit/:id', withAuth, async (req,res)=>{
+  try{
+    const postData = await Post.findOne({
+      where:{
+        id: req.params.id
+      },
+      include:[{
+        model: Comment,
+        attributes: ['id', 'comment_content', 'user_id', 'post_id', 'created_at'],
+        include: {
+          model: User,
+          attributes: ['username'],
+        }
+      }]
+    })
+    const post = postData.get({plain: true})
+    res.render('editPost', {
+      post, 
+      logged_in: true,
+    });
+  }catch(err){
+    res.status(500).json(err)
+  }
+})
 
 
 module.exports = router;
