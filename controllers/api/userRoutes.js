@@ -1,20 +1,36 @@
 const router = require('express').Router();
 const { User, Post, Comment } = require('../../models');
 
-// create user /api/user
-router.post('/', async (req, res) => {
-  try {
-    const userData = await User.create(req.body);
-
-    req.session.save(() => {
-      req.session.user_id = userData.id;
-      req.session.logged_in = true;
-
-      res.status(200).json(userData);
+// Get all users
+router.get('/', (req, res) => {
+  User.findAll({
+    attributes: {
+      exclude: ['password']
+    }
+  })
+    .then(dbUserData => res.json(dbUserData))
+    .catch(err => {
+      console.log(err);
+      res.status(500).json(err);
     });
-  } catch (err) {
-    res.status(400).json(err);
-  }
+});
+
+// create user /api/users
+router.post('/', async (req, res) => {
+  // try {
+  //   const userData = await User.create(req.body);
+
+  //   req.session.save(() => {
+  //     req.session.name = userData.name;
+  //     req.session.user_id = userData.id;
+  //     req.session.logged_in = true;
+
+  //     res.status(200).json(userData);
+  //   });
+  // } catch (err) {
+  //   res.status(400).json(err);
+  // }
+  const {name, email, password} = req.body
 });
 
 // match login and password to a user and verify correct input

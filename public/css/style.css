@@ -1,0 +1,71 @@
+* {
+  box-sizing: border-box;
+}
+
+body {
+  background-color: rgb(120, 197, 251);
+}
+
+a {
+  text-decoration: none;
+  font-weight: bold;
+}
+
+h1 {
+  color: rgb(107, 109, 112);
+}
+
+nav{
+  background-color: rgb(4, 41, 72);
+}
+
+.box-title{
+  text-align: center;
+  padding-bottom: 1rem;
+  padding-top: 2rem;
+}
+
+.login-box{
+  margin-top: 1rem;
+  margin-bottom: 0.5rem;
+}
+
+#signup-text{
+  font-size: 1.3rem;
+}
+
+.pageBtn {
+  margin: 2rem;
+  font-size: 1.3rem;
+  padding-top: .2rem;
+  padding-bottom: .2rem;
+  padding-left: 3rem;
+  padding-right: 3rem;
+}
+
+.border-rad{
+  border-radius: 15px;
+}
+
+.padding-LR {
+  padding-left: 1rem;
+  padding-right: 1rem;
+}
+
+.font-2{
+  font-size: 1.2rem;
+}
+
+.font-3{
+  font-size: 1.5rem;
+  color: cornsilk;
+}
+
+.color-1{
+  color: grey;
+}
+
+.form-box{
+  text-align: center;
+  margin: 1.5rem;
+}

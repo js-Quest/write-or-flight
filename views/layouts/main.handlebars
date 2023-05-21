@@ -14,27 +14,23 @@
 <body>
   <div>
     <header>
-      <h1>bansheeBytes</h1>
-      <nav class="navbar navbar-expand-lg navbar-light bg-light">
+      <h1 id='title'>bansheeBytes</h1>
+      <nav class="navbar navbar-expand-lg navbar-light">
         <!-- Conditionally render login or logout links -->
         <div class="container-fluid">
-          <a class="navbar-brand" href="/">Home</a>
-          <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNavAltMarkup"
-            aria-controls="navbarNavAltMarkup" aria-expanded="false" aria-label="Toggle navigation">
-            <span class="navbar-toggler-icon"></span>
-          </button>
-          <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
+          <a class="font-3" href="/">home</a>
+          {{!-- <div class="collapse navbar-collapse" id="navbarNavAltMarkup"> --}}
             <div class="navbar-nav">
               {{!-- <a class="nav-link active" aria-current="page" href="/">Home</a> --}}
               {{#if logged_in}}
-              <a class="nav-link" href="/dashboard">Dashboard</a>
-              <button class="no-button" id="logout">logout</button>
+              <a class="nav-link font-2 color-1" href="/dashboard">dashboard</a>
+              <button class="no-button font-2" id="logout">logout</button>
               {{else}}
-              <a class="nav-link" href="/login">Login</a>
+              <a class="font-2 color-1" href="/login">login</a>
               {{/if}}
               {{!-- <a class="nav-link disabled">Disabled</a> --}}
             </div>
-          </div>
+          {{!-- </div> --}}
         </div>
       </nav>
     </header>

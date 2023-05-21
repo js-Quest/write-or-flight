@@ -1,17 +1,21 @@
 {{!-- sign up form --}}
-  <h1>Signup</h1>
-<form class="signup-form">
+  <h1 class="box-title">signup</h1>
+<form class="signup-form form-box ">
   <div>
-    <label for="email-login">Email:</label>
-    <input type="text" id="email-login" placeholder="Example@email.com">
+    <label for="name-signup"></label>
+    <input class="login-box form-input border-rad padding-LR font-2" type="text" id="name-signup" placeholder="John Example Doe"/>
   </div>
   <div>
-    <label for="password-login">password:</label>
-    <input type="password" id="password-login" placeholder="YourPassword">
+    <label for="email-login"></label>
+    <input type="text" id="email-login email-signup" class="login-box border-rad padding-LR font-2" placeholder="Example@email.com"/>
+  </div>
+  <div>
+    <label for="password-login"></label>
+    <input type="password" id="password-login password-signup" class="login-box border-rad padding-LR font-2" placeholder="YourPassword"/>
   </div>
   <div>
 
-    <button type="submit">Submit</button>
+    <button class="pageBtn border-rad" type="submit">Submit</button>
   </div>
-  <a href="/login"> click here to Login</a>
+  <a href="/login"> click here to <span id="signup-text">Login</span></a>
 </form>
