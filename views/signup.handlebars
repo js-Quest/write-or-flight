@@ -1,17 +1,17 @@
 {{!-- sign up form --}}
   <h1 class="box-title">signup</h1>
-<form class="signup-form form-box ">
+<form id="signup-form" class="form-box ">
   <div>
     <label for="name-signup"></label>
-    <input class="login-box form-input border-rad padding-LR font-2" type="text" id="name-signup" placeholder="John Example Doe"/>
+    <input class="login-box form-input border-rad padding-LR font-2" type="text" id="name-signup" name="name-signup" placeholder="John Example Doe"/>
   </div>
   <div>
-    <label for="email-login"></label>
-    <input type="text" id="email-login email-signup" class="login-box border-rad padding-LR font-2" placeholder="Example@email.com"/>
+    <label for="email-signup"></label>
+    <input type="text" id="email-signup" name="email-signup" class="login-box border-rad padding-LR font-2" placeholder="Example@email.com"/>
   </div>
   <div>
-    <label for="password-login"></label>
-    <input type="password" id="password-login password-signup" class="login-box border-rad padding-LR font-2" placeholder="YourPassword"/>
+    <label for="password-signup"></label>
+    <input type="password" id="password-signup" name="password-signup" class="login-box border-rad padding-LR font-2" placeholder="YourPassword"/>
   </div>
   <div>
 
@@ -19,3 +19,5 @@
   </div>
   <a href="/login"> click here to <span id="signup-text">Login</span></a>
 </form>
+
+<script src="/js/signup.js"></script>

@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
   <meta charset="UTF-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -18,28 +19,24 @@
       <nav class="navbar navbar-expand-lg navbar-light">
         <!-- Conditionally render login or logout links -->
         <div class="container-fluid">
-          <a class="font-3" href="/">home</a>
-          {{!-- <div class="collapse navbar-collapse" id="navbarNavAltMarkup"> --}}
-            <div class="navbar-nav">
-              {{!-- <a class="nav-link active" aria-current="page" href="/">Home</a> --}}
-              {{#if logged_in}}
-              <a class="nav-link font-2 color-1" href="/dashboard">dashboard</a>
-              <button class="no-button font-2" id="logout">logout</button>
-              {{else}}
-              <a class="font-2 color-1" href="/login">login</a>
-              {{/if}}
-              {{!-- <a class="nav-link disabled">Disabled</a> --}}
-            </div>
-          {{!-- </div> --}}
+          <div class="navbar-nav">
+            {{#if logged_in}}
+            {{!-- <a class="nav-link font-2 color-1" href="/dashboard">dashboard</a> --}}
+            <a href="" class="color-1 font-2" id="logout">logout</a>
+            {{else}}
+            <a class="font-3" href="/">home</a>
+          </div>
+            <a class="font-2 color-1" href="/login">login</a>
+            {{/if}}
         </div>
       </nav>
     </header>
-  <main>
-  <!-- Render the sub layout -->
-  {{{ body }}}
-  </main>
-  <footer>
-  </footer>
+    <main>
+      <!-- Render the sub layout -->
+      {{{ body }}}
+    </main>
+    <footer>
+    </footer>
   </div>
 
 
@@ -50,4 +47,5 @@
   <script src="/js/logout.js"></script>
   {{/if}}
 </body>
+
 </html>

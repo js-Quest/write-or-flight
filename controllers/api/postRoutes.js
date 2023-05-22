@@ -54,10 +54,24 @@ const withAuth = require('../../utils/auth');
 // });
 
 // module.exports = router;
+router.get('/', async (req,res) => {
+  try{
+    const dbPostData = await Post.findAll({
+      include: [{
+        model: User,
+        attributes: ['name']
+      }],
+    })
+    res.status(200).json(dbPostData)
+  }catch(err){
+    console.log(err); // Log the error to the console for debugging
+    res.status(500).json({ error: err.message });
+  }
+})
 
 router.post('/', withAuth, async (req, res) => {
   try {
-    const newPost = await newPost.create({
+    const newPost = await new Post.create({
       ...req.body,
       user_id: req.session.user_id,
     });
@@ -73,7 +87,7 @@ try {
   const postData = await Post.destroy({
     where: {
       id: req.params.id,
-      user_id: req.session.user_id,
+      // user_id: req.session.user_id,
     }
   });
   if (!postData){

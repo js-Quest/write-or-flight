@@ -45,7 +45,7 @@ router.post('/', async (req, res) => {
   //     req.session.logged_in = true;
   //     res.status(200).json(newUser);
   //   })
-  // }catch{
+  // }catch(err){
   //   res.status(500).json({error: 'something went wrong'})
   // }
 });
