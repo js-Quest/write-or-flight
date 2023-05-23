@@ -2,58 +2,7 @@ const router = require('express').Router();
 const { Post, User, Comment } = require('../../models');
 const withAuth = require('../../utils/auth');
 
-// // get all posts
-// router.get('/', async (req,res) => {
-//   try{
-//     Post.findAll({ 
-//       attributes: ['id', 'title', 'post_content', 'created_at'],
-//       order: [['created_at', 'DESC']],
-//       include: [
-//         {
-//           model: Comment,
-//           attributes: ['id', 'comment_content', 'post_id', 'user_id', 'created_at'],
-//           include: {
-//               model: User,
-//               attributes: ['username']
-//             },
-//         },
-//         {
-//           model: User,
-//           attributes: ['username']
-//         }
-//       ],
-//     })
-//   }
-// })
 
-// router.get('/:id', async (req, res) => {
-//   try {
-//     const postData = await Post.findByPk(req.params.id, {
-//       include: [
-//         {
-//           model: Comment,
-//           attributes: ['id', 'comment_content', 'post_id', 'user_id', 'created_at'],
-//           include: [
-//             {
-//               model: User,
-//               attributes: ['username']
-//             },
-//           ],
-//         },
-//       ],
-//     });
-//     const post = postData.get({ plain: true });
-//     // Pass data and session flag into template
-//     res.render('post', {
-//       ...post,
-//       logged_in: req.session.logged_in
-//     });
-//   } catch (err) {
-//     res.status(500).json(err);
-//   }
-// });
-
-// module.exports = router;
 router.get('/', async (req,res) => {
   try{
     const dbPostData = await Post.findAll({
@@ -71,7 +20,8 @@ router.get('/', async (req,res) => {
 
 router.post('/', withAuth, async (req, res) => {
   try {
-    const newPost = await new Post.create({
+    
+    const newPost = await Post.create({
       ...req.body,
       user_id: req.session.user_id,
     });

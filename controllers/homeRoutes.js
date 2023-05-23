@@ -7,24 +7,15 @@ const withAuth = require('../utils/auth');
 router.get('/', async (req, res) => {
   try {
     if(req.session.logged_in){
-      const userData = await User.findByPk(req.session.user_id, {
-        attributes: {exclude: ['password']},
-        include: [{model: Post}]
+      
+      const dbPostData = await Post.findAll({
+        include: [User],
       });
 
-      const user = userData.get({plain: true})
-    
-      const dbPostData = await Post.findAll({
-        include: [{
-          model: User,
-        attributes: ['name']
-      }],
-      });
       const posts = dbPostData.map((post) => post.get({ plain: true}));
-      console.log(posts)
+      
 
       res.render('homepage', {
-        ...user,
         posts, 
         logged_in: req.session.logged_in
       });

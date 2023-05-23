@@ -6,15 +6,16 @@ const withAuth = require('../utils/auth');
 router.get('/', withAuth, async (req, res) => {
   try {
     // Find the logged in user based on the session ID
-    const userData = await User.findByPk(req.session.user_id, {
-      attributes: { exclude: ["password"] },
-      include: [{ model: Post }],
+    const postData = await Post.findAll({
+      where: {
+        user_id: req.session.user_id
+      }
     });
 
-    const user = userData.get({ plain: true });
-
+    const posts = postData.map(post => post.get({ plain: true }));
+    console.log(posts);
     res.render('dashboard', {
-      ...user,
+      posts,
       logged_in: true,
     });
   } catch (err) {
@@ -25,20 +26,20 @@ router.get('/', withAuth, async (req, res) => {
 
 
 // new post
-router.get('/new', (req,res) => {
+router.get('/new', (req, res) => {
   res.render('createPost', {
     logged_in: true
   })
 })
 
 // edit post
-router.get('/edit/:id', withAuth, async (req,res)=>{
-  try{
+router.get('/edit/:id', withAuth, async (req, res) => {
+  try {
     const postData = await Post.findOne({
-      where:{
+      where: {
         id: req.params.id
       },
-      include:[{
+      include: [{
         model: Comment,
         attributes: ['id', 'comment_content', 'user_id', 'post_id', 'created_at'],
         include: {
@@ -47,12 +48,12 @@ router.get('/edit/:id', withAuth, async (req,res)=>{
         }
       }]
     })
-    const post = postData.get({plain: true})
+    const post = postData.get({ plain: true })
     res.render('editPost', {
-      post, 
+      post,
       logged_in: true,
     });
-  }catch(err){
+  } catch (err) {
     res.status(500).json(err)
   }
 })

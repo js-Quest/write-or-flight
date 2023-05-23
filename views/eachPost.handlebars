@@ -4,18 +4,18 @@
 {{>postInfo post}}
 
 {{#if logged_in}}
-<form>
-  <textarea name="" id="" cols="" rows="">
+<form id="comment-form">
+  <textarea name="comment-content" id="comment-content" cols="" rows="">
 
   </textarea>
   <div>
 {{!--  button for add comment --}}
-    <button>add comment</button>
+    <button class="pageBtn border-rad" type="submit">add comment</button>
   </div>
 </form>
 {{/if}}
 
 {{>comments post.comments}}
 
-
+<script src="/js/comment.js"></script>
 {{!-- option to return to dash --}}
